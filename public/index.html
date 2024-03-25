@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask a Question</title>
+    <script src="app.js" defer></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 40px;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .loading {
+        animation: blink 1s linear infinite;
+      }
+
+      .input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 80%;
+        max-width: 600px;
+      }
+
+      #questionInput {
+        padding: 12px 15px;
+        flex-grow: 1;
+        margin-right: 10px; /* Space between input and button */
+        border: 1px solid #007bff;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s;
+        font-size: 15px;
+      }
+
+      #questionInput:focus {
+        border-color: #0056b3;
+      }
+
+      button {
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #response {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #ffffff;
+        width: 80%;
+        border: 1px solid #007bff;
+        border-radius: 8px;
+        min-height: 200px; /* Set minimum height instead of fixed height */
+        max-width: 570px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        word-wrap: break-word;
+        overflow: auto; /* Adds scroll for overflow content */
+      }
+
+      @media (max-width: 768px) {
+        .input-container {
+          flex-direction: column;
+          align-items: stretch; /* Makes sure input and button width match */
+        }
+        #questionInput {
+          margin-right: 0; /* Remove margin-right as it's no longer needed */
+          margin-bottom: 20px; /* Space between input and button */
+        }
+        button {
+          /* Prevents button from stretching full width */
+          width: auto;
+          align-self: center; /* Align button to center below input */
+        }
+      }
+
+      label,
+      #responseTitle {
+        font-size: 20px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ask a Question</h1>
+    <div class="input-container">
+      <input
+        type="text"
+        id="questionInput"
+        placeholder="Type your question here"
+        onkeydown="submitOnEnter(event)"
+      />
+      <button onclick="askQuestion()">Submit</button>
+    </div>
+    <div id="responseTitle" style="margin-top: 30px">Response:</div>
+    <div id="response"></div>
+
+    <script>
+      function submitOnEnter(event) {
+        // Check if the key pressed is the Enter key
+        if (event.key === "Enter") {
+          event.preventDefault(); // Prevent the default action to avoid submitting the form
+          askQuestion(); // Call the askQuestion function
+        }
+      }
+    </script>
+  </body>
+</html>
